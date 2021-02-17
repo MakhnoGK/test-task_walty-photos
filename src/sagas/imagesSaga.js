@@ -1,9 +1,14 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { GET_IMAGE_DATA, GET_IMAGE_DATA_ASYNC } from '../ducks/images';
+import {
+  FETCHED_IMAGES,
+  requestImages,
+  requestImagesFulfilled,
+} from '../ducks/images';
 
 const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
 
 function getData(tags) {
+  console.log(tags);
   const term = tags.map((tag) => tag.replaceAll(/\W+/g, '')).join('+');
 
   return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
@@ -11,12 +16,17 @@ function getData(tags) {
     .then((data) => data);
 }
 
-function* getImageDataAsync(action) {
-  const imageData = yield call(getData, action.payload);
+function* fetchImagesAsync(action) {
+  try {
+    yield put(requestImages());
 
-  yield put({ type: GET_IMAGE_DATA_ASYNC, payload: imageData });
+    const data = yield call(getData, action.payload);
+    yield put(requestImagesFulfilled(data));
+  } catch (reason) {
+    console.error('Saga request failed: ', reason);
+  }
 }
 
-export function* watchGetImageDataAsync() {
-  yield takeEvery(GET_IMAGE_DATA, getImageDataAsync);
+export default function* watchFetchImages() {
+  yield takeEvery(FETCHED_IMAGES, fetchImagesAsync);
 }

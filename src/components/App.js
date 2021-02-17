@@ -1,29 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import ImageList from './ImageList';
-import SearchForm from './SearchForm';
-import { useTags } from '../hooks/useTags';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { onGetImagesAsync } from '../ducks/images';
 
-const App = ({ images, getImages }) => {
+import ImageList from './ImageList';
+import SearchForm from './SearchForm';
+
+import { useTags } from '../hooks/useTags';
+import { fetchImages } from '../ducks/images';
+
+const App = ({ imageData, loading, onFetchImages }) => {
   const [tags, setTags] = useTags([]);
-  const [loading, setLoading] = useState(false);
-  const [imagesData, setImagesData] = useState({
-    images: [],
-    total: 0,
-    totalHits: 0,
-  });
-
-
-  const handleTags = (input) => {
-    setTags(input.values);
-  };
-
-  const handleSearch = () => {
-    getImages(tags);    
-  };
 
   return (
     <Container className="mb-5">
@@ -31,7 +18,11 @@ const App = ({ images, getImages }) => {
 
       <Row className="mb-4">
         <Col>
-          <SearchForm onSearch={handleSearch} onTags={handleTags} tags={tags} />
+          <SearchForm
+            onTags={(target) => setTags(target.values)}
+            onSearch={() => onFetchImages(tags)}
+            tags={tags}
+          />
         </Col>
       </Row>
 
@@ -39,12 +30,13 @@ const App = ({ images, getImages }) => {
         <Col>
           {loading && <p className="text-center mt-2">Loading...</p>}
 
-          {imagesData.total > 0 && (
+          {imageData.total > 0 && (
             <p className="text-right mt-2">
-              Results: {imagesData.totalHits} of {imagesData.total}
+              Results: {imageData.totalHits} of {imageData.total}
             </p>
           )}
-          <ImageList images={images} />
+
+          <ImageList images={imageData.images} />
         </Col>
       </Row>
 
@@ -71,17 +63,23 @@ const App = ({ images, getImages }) => {
   );
 };
 
-// Todo add images prop
 App.propTypes = {
-  getImages: PropTypes.func,
+  onFetchImages: PropTypes.func,
+  imageData: PropTypes.shape({
+    images: PropTypes.array,
+    total: PropTypes.number,
+    totalHits: PropTypes.number,
+  }),
+  loading: PropTypes.bool,
 };
 
 const propsMap = (state) => ({
-  images: state.images,
+  imageData: state.data,
+  loading: state.loading,
 });
 
 const dispatchMap = (dispatch) => ({
-  getImages: (term) => dispatch(onGetImagesAsync(term)),
+  onFetchImages: (term) => dispatch(fetchImages(term)),
 });
 
 export default connect(propsMap, dispatchMap)(App);

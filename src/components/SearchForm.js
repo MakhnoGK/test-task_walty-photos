@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputTags } from 'react-bootstrap-tagsinput';
 import { Button } from 'react-bootstrap';
 
-import { InputTags } from 'react-bootstrap-tagsinput';
 import 'react-bootstrap-tagsinput/dist/index.css';
 
 const SearchForm = ({ onSearch, onTags, tags }) => {
