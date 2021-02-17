@@ -15,7 +15,7 @@ const App = () => {
   });
 
   const fetchImageData = async () => {
-    const term = tags.map((tag) => tag.replaceAll(/\W+/, '')).join('+');
+    const term = tags.map((tag) => tag.replaceAll(/\W+/g, '')).join('+');
 
     return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
       .then((response) => response.json())
