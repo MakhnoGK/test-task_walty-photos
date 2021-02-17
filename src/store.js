@@ -1,10 +1,13 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import imagesReducer from './ducks/images';
 
-const rootReducer = combineReducers({
-  imagesReducer
-});
+import { watchGetImageDataAsync } from './sagas/imagesSaga';
 
-const appStore = createStore(rootReducer);
+
+const sagaMiddleware = createSagaMiddleware();
+const appStore = createStore(imagesReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(watchGetImageDataAsync);
 
 export default appStore;

@@ -3,12 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ImageList from './ImageList';
 import SearchForm from './SearchForm';
 import { useTags } from '../hooks/useTags';
-import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { onGetImagesAsync } from '../ducks/images';
 
-const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
-
-const App = () => {
+const App = ({ images, getImages }) => {
   const [tags, setTags] = useTags([]);
   const [loading, setLoading] = useState(false);
   const [imagesData, setImagesData] = useState({
@@ -17,30 +16,13 @@ const App = () => {
     totalHits: 0,
   });
 
-  const fetchImageData = async () => {
-    const term = tags.map((tag) => tag.replaceAll(/\W+/g, '')).join('+');
-
-    return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
-      .then((response) => response.json())
-      .then((data) => data);
-  };
 
   const handleTags = (input) => {
     setTags(input.values);
   };
 
   const handleSearch = () => {
-    setLoading(true);
-
-    fetchImageData().then((imageData) => {
-      setLoading(false);
-      setImagesData((state) => ({
-        ...state,
-        images: imageData.hits,
-        total: imageData.total,
-        totalHits: imageData.totalHits,
-      }));
-    });
+    getImages(tags);    
   };
 
   return (
@@ -62,7 +44,7 @@ const App = () => {
               Results: {imagesData.totalHits} of {imagesData.total}
             </p>
           )}
-          <ImageList images={imagesData.images} />
+          <ImageList images={images} />
         </Col>
       </Row>
 
@@ -89,8 +71,17 @@ const App = () => {
   );
 };
 
-App.propTypes = {};
+// Todo add images prop
+App.propTypes = {
+  getImages: PropTypes.func,
+};
 
-const propsMap = (state) => ({});
+const propsMap = (state) => ({
+  images: state.images,
+});
 
-export default connect(propsMap)(App);
+const dispatchMap = (dispatch) => ({
+  getImages: (term) => dispatch(onGetImagesAsync(term)),
+});
+
+export default connect(propsMap, dispatchMap)(App);
