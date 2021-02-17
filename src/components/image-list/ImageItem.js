@@ -14,7 +14,7 @@ const ImageItem = (props) => {
   const displayTags = (input) => {
     return input
       .split(', ')
-      .map((tag) => <TagLink href={`/${tag}`}>{tag}</TagLink>);
+      .map((tag, index) => <TagLink key={index} href={`/${tag}`}>{tag}</TagLink>);
   };
 
   return (
