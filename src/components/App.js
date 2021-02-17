@@ -1,8 +1,10 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ImageList from './ImageList';
 import SearchForm from './SearchForm';
 import { useTags } from '../hooks/useTags';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
 
@@ -89,4 +91,6 @@ const App = () => {
 
 App.propTypes = {};
 
-export default App;
+const propsMap = (state) => ({});
+
+export default connect(propsMap)(App);
