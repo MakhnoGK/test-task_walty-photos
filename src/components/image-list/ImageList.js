@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageItem from './ImageItem';
-import styled from 'styled-components';
 
-const ListContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-`;
+import ImageItem from './ImageItem';
+
+import { ListContainer } from '../../styled/image-list';
 
 const ImageList = (props) => {
   const { images } = props;
