@@ -13,9 +13,9 @@ export const requestImagesFulfilled = (imageData: IImageData) => ({
   type: ImageActionTypes.REQUEST_IMAGES_FULFILLED,
   payload: imageData,
 });
-export const fetchImages = (tags: string) => ({
+export const fetchImages = (term: string) => ({
   type: ImageActionTypes.FETCHED_IMAGES,
-  payload: tags,
+  payload: term,
 });
 
 const initialState: ImageState = {

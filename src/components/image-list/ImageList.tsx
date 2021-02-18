@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import ImageItem from './ImageItem';
 
 import { ListContainer } from '../../styled/image-list';
+import { IImage } from '../../interfaces/IImageData';
 
-const ImageList = ({ images }) => {
+const ImageList: React.FC<{ images: IImage[] }> = ({ images }) => {
   return (
     <ListContainer>
       {images.map((image) => (
@@ -16,7 +17,7 @@ const ImageList = ({ images }) => {
 };
 
 ImageList.propTypes = {
-  images: PropTypes.array,
+  images: PropTypes.array.isRequired,
 };
 
 export default ImageList;
