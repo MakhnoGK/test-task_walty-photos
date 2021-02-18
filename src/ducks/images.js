@@ -7,7 +7,7 @@ export const requestImagesFulfilled = (imageData) => ({
   type: REQUEST_IMAGES_FULFILLED,
   payload: imageData,
 });
-export const fetchImages = (term) => ({ type: FETCHED_IMAGES, payload: term });
+export const fetchImages = (tags) => ({ type: FETCHED_IMAGES, payload: tags });
 
 const initialState = {
   data: {

@@ -5,23 +5,14 @@ import { connect } from 'react-redux';
 
 import { ImageList, SearchForm } from '.';
 
-import { useTags } from '../hooks/useTags';
-import { fetchImages } from '../ducks/images';
-
-const App = ({ imageData, loading, onFetchImages }) => {
-  const [tags, setTags] = useTags([]);
-
+const App = ({ imageData, loading }) => {
   return (
     <Container className="mb-5">
       <h2 className="text-center my-4">Walty - graphics for all your needs</h2>
 
       <Row className="mb-4">
         <Col>
-          <SearchForm
-            onTags={(target) => setTags(target.values)}
-            onSearch={() => onFetchImages(tags)}
-            tags={tags}
-          />
+          <SearchForm />
         </Col>
       </Row>
 
@@ -63,7 +54,6 @@ const App = ({ imageData, loading, onFetchImages }) => {
 };
 
 App.propTypes = {
-  onFetchImages: PropTypes.func,
   imageData: PropTypes.shape({
     images: PropTypes.array,
     total: PropTypes.number,
@@ -77,8 +67,4 @@ const propsMap = (state) => ({
   loading: state.loading,
 });
 
-const dispatchMap = (dispatch) => ({
-  onFetchImages: (term) => dispatch(fetchImages(term)),
-});
-
-export default connect(propsMap, dispatchMap)(App);
+export default connect(propsMap)(App);

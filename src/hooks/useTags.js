@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 export const useTags = (initialValue) => {
-  const [tags, setTags] = useState(initialValue);
+  const [tags, setTags] = useState(() => initialValue);
   const params = useParams();
   const history = useHistory();
 
@@ -13,8 +13,10 @@ export const useTags = (initialValue) => {
   }, []);
 
   useEffect(() => {
-    const tagsUrl = `/${tags.join('+')}`;
-    history.push(tagsUrl);
+    if (tags) {
+      const tagsUrl = `/${tags.join('+')}`;
+      history.push(tagsUrl);
+    }
   }, [tags, history]);
 
   return [tags, setTags];
