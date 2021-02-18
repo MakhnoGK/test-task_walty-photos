@@ -13,12 +13,8 @@ export const useTags = (initialValue) => {
   }, []);
 
   useEffect(() => {
-    
-
-    if (tags) {
-      const tagsUrl = `/${tags.join('+')}`;
-      history.push(tagsUrl);
-    }
+    const tagsUrl = `/${tags.join('+')}`;
+    history.push(tagsUrl);
   }, [tags, history]);
 
   return [tags, setTags];
