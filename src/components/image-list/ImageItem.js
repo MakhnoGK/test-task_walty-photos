@@ -12,9 +12,11 @@ const ImageItem = (props) => {
   const { type, tags, webformatURL } = props.image;
 
   const displayTags = (input) => {
-    return input
-      .split(', ')
-      .map((tag, index) => <TagLink key={index} href={`/${tag}`}>{tag}</TagLink>);
+    return input.split(', ').map((tag, index) => (
+      <TagLink key={index} href={`/${tag}`}>
+        {tag}
+      </TagLink>
+    ));
   };
 
   return (
