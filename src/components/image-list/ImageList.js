@@ -5,9 +5,7 @@ import ImageItem from './ImageItem';
 
 import { ListContainer } from '../../styled/image-list';
 
-const ImageList = (props) => {
-  const { images } = props;
-
+const ImageList = ({ images }) => {
   return (
     <ListContainer>
       {images.map((image) => (

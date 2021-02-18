@@ -8,9 +8,7 @@ import {
   TagLink,
 } from '../../styled/image-list';
 
-const ImageItem = (props) => {
-  const { type, tags, webformatURL } = props.image;
-
+const ImageItem = ({ type, tags, webformatURL }) => {
   const displayTags = (input) => {
     return input.split(', ').map((tag, index) => (
       <TagLink key={index} href={`/${tag}`}>
