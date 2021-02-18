@@ -1,104 +1,84 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
 
 import { ImageList, SearchForm } from '.';
 
 import { useTags } from '../hooks/useTags';
-import { Global } from '../styled';
+import { fetchImages } from '../ducks/images';
 
-const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
-
-const App = () => {
+const App = ({ imageData, loading, onFetchImages }) => {
   const [tags, setTags] = useTags([]);
-  const [loading, setLoading] = useState(false);
-  const [imagesData, setImagesData] = useState({
-    images: [],
-    total: 0,
-    totalHits: 0,
-  });
-
-  const fetchImageData = async () => {
-    const term = tags.map((tag) => tag.replaceAll(/\W+/g, '')).join('+');
-
-    return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
-      .then((response) => response.json())
-      .then((data) => data);
-  };
-
-  const handleTags = (input) => {
-    setTags(input.values);
-  };
-
-  const handleSearch = () => {
-    setLoading(true);
-
-    fetchImageData().then((imageData) => {
-      setLoading(false);
-      setImagesData((state) => ({
-        ...state,
-        images: imageData.hits,
-        total: imageData.total,
-        totalHits: imageData.totalHits,
-      }));
-    });
-  };
 
   return (
-    <>
-      <Global />
+    <Container className="mb-5">
+      <h2 className="text-center my-4">Walty - graphics for all your needs</h2>
 
-      <Container className="mb-5">
-        <h2 className="text-center my-4">
-          Walty - graphics for all your needs
-        </h2>
+      <Row className="mb-4">
+        <Col>
+          <SearchForm
+            onTags={(target) => setTags(target.values)}
+            onSearch={() => onFetchImages(tags)}
+            tags={tags}
+          />
+        </Col>
+      </Row>
 
-        <Row className="mb-4">
-          <Col>
-            <SearchForm
-              onSearch={handleSearch}
-              onTags={handleTags}
-              tags={tags}
-            />
-          </Col>
-        </Row>
+      <Row className="mb-5">
+        <Col>
+          {loading && <p className="text-center mt-2">Loading...</p>}
 
-        <Row className="mb-5">
-          <Col>
-            {loading && <p className="text-center mt-2">Loading...</p>}
+          {imageData.total > 0 && (
+            <p className="text-right mt-2">
+              Results: {imageData.totalHits} of {imageData.total}
+            </p>
+          )}
 
-            {imagesData.total > 0 && (
-              <p className="text-right mt-2">
-                Results: {imagesData.totalHits} of {imagesData.total}
-              </p>
-            )}
-            <ImageList images={imagesData.images} />
-          </Col>
-        </Row>
+          <ImageList images={imageData.images} />
+        </Col>
+      </Row>
 
-        <Row>
-          <Col>
-            <div className="d-flex align-items-center justify-content-center">
-              Powered by{' '}
-              <a
-                href="http://pixabay.com/"
-                rel="noreferrer"
-                target="_blank"
-                className="ml-2"
-              >
-                <img
-                  src="https://pixabay.com/static/img/logo.svg"
-                  alt="Pixabay"
-                  width="150"
-                />
-              </a>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </>
+      <Row>
+        <Col>
+          <div className="d-flex align-items-center justify-content-center">
+            Powered by{' '}
+            <a
+              href="http://pixabay.com/"
+              rel="noreferrer"
+              target="_blank"
+              className="ml-2"
+            >
+              <img
+                src="https://pixabay.com/static/img/logo.svg"
+                alt="Pixabay"
+                width="150"
+              />
+            </a>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-App.propTypes = {};
+App.propTypes = {
+  onFetchImages: PropTypes.func,
+  imageData: PropTypes.shape({
+    images: PropTypes.array,
+    total: PropTypes.number,
+    totalHits: PropTypes.number,
+  }),
+  loading: PropTypes.bool,
+};
 
-export default App;
+const propsMap = (state) => ({
+  imageData: state.data,
+  loading: state.loading,
+});
+
+const dispatchMap = (dispatch) => ({
+  onFetchImages: (term) => dispatch(fetchImages(term)),
+});
+
+export default connect(propsMap, dispatchMap)(App);

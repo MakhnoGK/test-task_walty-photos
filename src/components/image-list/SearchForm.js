@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { InputTags } from 'react-bootstrap-tagsinput';
+import { Button } from 'react-bootstrap';
 
 import 'react-bootstrap-tagsinput/dist/index.css';
 
