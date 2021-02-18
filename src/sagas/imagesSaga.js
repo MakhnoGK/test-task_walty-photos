@@ -1,9 +1,9 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import {
-  FETCHED_IMAGES,
   requestImages,
   requestImagesFulfilled,
 } from '../ducks/images';
+import { ImageActionTypes } from '../ducks/images';
 
 const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
 
@@ -25,5 +25,5 @@ function* fetchImagesAsync(action) {
 }
 
 export default function* watchFetchImages() {
-  yield takeEvery(FETCHED_IMAGES, fetchImagesAsync);
+  yield takeEvery(ImageActionTypes.FETCHED_IMAGES, fetchImagesAsync);
 }

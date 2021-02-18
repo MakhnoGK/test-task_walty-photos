@@ -26,7 +26,7 @@ const App = ({ imageData, loading }) => {
             </p>
           )}
 
-          <ImageList images={imageData.images} />
+          <ImageList images={imageData.hits} />
         </Col>
       </Row>
 
