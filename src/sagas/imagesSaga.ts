@@ -4,16 +4,17 @@ import {
   requestImagesFulfilled,
 } from '../ducks/images';
 import { ImageActionTypes } from '../ducks/images';
+import { FetchImageAction } from '../types/fetchImageAction';
 
 const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
 
-function getData(term) {
-  return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
-    .then((response) => response.json())
-    .then((data) => data);
+async function getData(term: string): Promise<ImageActionTypes> {
+  const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`);
+  const data = await response.json();
+  return data;
 }
 
-function* fetchImagesAsync(action) {
+function* fetchImagesAsync(action: FetchImageAction) {
   try {
     yield put(requestImages());
 
