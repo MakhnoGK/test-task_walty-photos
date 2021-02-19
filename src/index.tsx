@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { App, Params } from './components';
+import { App } from './components';
 
 import store from './redux';
 import reportWebVitals from './reportWebVitals';
@@ -14,7 +14,6 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route path="/test/:tags" component={Params} />
           <Route path="/" component={App} exact />
           <Route path="/:tags" component={App} />
         </Switch>
