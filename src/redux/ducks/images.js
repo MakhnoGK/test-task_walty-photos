@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-
-const API_KEY = '20295782-d190a9f4db1bc0031bd7c6307';
+import { getImages } from '../../api';
 
 //#region Action types
 export const REQUEST_IMAGES = 'app/images/request';
@@ -49,17 +48,11 @@ export const requestImagesFulfilled = (imageData) => ({
 export const fetchImages = (tags) => ({ type: FETCHED_IMAGES, payload: tags });
 //#endregion
 //#region Sagas
-function getData(term) {
-  return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${term}`)
-    .then((response) => response.json())
-    .then((data) => data);
-}
-
 function* fetchImagesAsync(action) {
   try {
     yield put(requestImages());
 
-    const data = yield call(getData, action.payload);
+    const data = yield call(getImages, action.payload);
     yield put(requestImagesFulfilled(data));
   } catch (reason) {
     console.error('Saga request failed: ', reason);
