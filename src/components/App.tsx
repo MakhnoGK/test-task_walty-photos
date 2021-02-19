@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { ImageList, SearchForm } from '.';
 
-import { ImageState } from '../types/ImageState';
+import { ImageState } from '../types/imageState';
 
 const App: React.FC<ImageState> = ({ data, loading }) => (
   <Container className="mb-5">

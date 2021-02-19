@@ -2,8 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { getImages } from '../../api';
 import { IImageData } from '../../interfaces/IImageData';
-import { ImageAction } from '../../types/ImageAction';
-import { ImageState } from '../../types/ImageState';
+import { ImageAction } from '../../types/imageAction';
+import { ImageState } from '../../types/imageState';
 
 //#region Action types
 export enum ImageActionTypes {
