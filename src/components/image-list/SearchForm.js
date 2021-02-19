@@ -11,7 +11,7 @@ const SearchForm = ({ onFetchImages }) => {
   const [tags, setTags] = useTags([]);
 
   useEffect(() => {
-    const term = tags.map((tag) => tag.replaceAll(/\W+/g, '')).join('+');
+    const term = tags.join('+');
     onFetchImages(term);
   }, [tags, onFetchImages]);
 
