@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ImageItem from './ImageItem';
 
 import { ListContainer } from '../../styled/image-list';
-import { IImage } from '../../interfaces/IImageData';
+import { IImage } from '../../interfaces/IImage';
 
 const ImageList: React.FC<{ images: IImage[] }> = ({ images }) => (
   <ListContainer>

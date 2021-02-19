@@ -4,7 +4,7 @@ import { InputTags } from 'react-bootstrap-tagsinput';
 import { connect } from 'react-redux';
 
 import { useTags } from '../../hooks/useTags';
-import { fetchImages, ImageActionTypes } from '../../ducks/images';
+import { fetchImages, ImageActionTypes } from '../../redux/ducks/images';
 import 'react-bootstrap-tagsinput/dist/index.css';
 
 const SearchForm: React.FC<{

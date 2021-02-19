@@ -1,6 +1,6 @@
-import { ImageActionTypes } from "../ducks/images";
+import { ImageActionTypes } from '../redux/ducks/images';
 
 export type FetchImageAction = {
-  type: ImageActionTypes.FETCHED_IMAGES,
+  type: ImageActionTypes.FETCHED_IMAGES;
   payload: string;
-}
+};

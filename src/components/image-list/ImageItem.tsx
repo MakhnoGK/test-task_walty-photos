@@ -7,7 +7,7 @@ import {
   Image,
   TagLink,
 } from '../../styled/image-list';
-import { IImage } from '../../interfaces/IImageData';
+import { IImage } from '../../interfaces/IImage';
 
 const ImageItem: React.FC<{ image: IImage }> = ({
   image: { tags, type, webformatURL },
@@ -31,7 +31,6 @@ const ImageItem: React.FC<{ image: IImage }> = ({
 
 ImageItem.propTypes = {
   image: PropTypes.shape({
-    id: PropTypes.number,
     tags: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     webformatURL: PropTypes.string.isRequired,
