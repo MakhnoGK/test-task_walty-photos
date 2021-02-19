@@ -2,14 +2,20 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 export const useTags = (initialValue) => {
-  const [tags, setTags] = useState(initialValue);
+  const [tags, setRawTags] = useState(() => initialValue);
   const params = useParams();
   const history = useHistory();
 
+  const setTags = (newValue) => {
+    const withoutSpecialChars = newValue.map((item) => item.replaceAll(/\W+/g, ''));
+    setRawTags(withoutSpecialChars);
+  }
+
   useEffect(() => {
     if (params && params.tags) {
-      setTags(params.tags.split('+'));
+      setRawTags(params.tags.split('+'));
     }
+  // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

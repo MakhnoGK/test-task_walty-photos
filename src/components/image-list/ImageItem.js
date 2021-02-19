@@ -8,13 +8,13 @@ import {
   TagLink,
 } from '../../styled/image-list';
 
-const ImageItem = (props) => {
-  const { type, tags, webformatURL } = props.image;
-
+const ImageItem = ({image: { type, tags, webformatURL }}) => {
   const displayTags = (input) => {
-    return input
-      .split(', ')
-      .map((tag, index) => <TagLink key={index} href={`/${tag}`}>{tag}</TagLink>);
+    return input.split(', ').map((tag, index) => (
+      <TagLink key={index} href={`/${tag}`}>
+        {tag}
+      </TagLink>
+    ));
   };
 
   return (
@@ -29,7 +29,6 @@ const ImageItem = (props) => {
 ImageItem.propTypes = {
   image: PropTypes.shape({
     webformatURL: PropTypes.string,
-    largeImageURL: PropTypes.string,
     type: PropTypes.string,
     tags: PropTypes.string,
   }),

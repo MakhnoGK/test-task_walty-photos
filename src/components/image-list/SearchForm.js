@@ -1,32 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { InputTags } from 'react-bootstrap-tagsinput';
+import { connect } from 'react-redux';
 
+import { useTags } from '../../hooks/useTags';
+import { fetchImages } from '../../redux/ducks/images';
 import 'react-bootstrap-tagsinput/dist/index.css';
 
-const SearchForm = ({ onSearch, onTags, tags }) => {
-  const handleSearch = (e) => {
-    onSearch(tags);
-  };
+const SearchForm = ({ onFetchImages }) => {
+  const [tags, setTags] = useTags([]);
+
+  useEffect(() => {
+    const term = tags.join('+');
+    onFetchImages(term);
+  }, [tags, onFetchImages]);
 
   return (
     <div className="input-group">
       <InputTags
         values={tags}
-        onTags={onTags}
+        onTags={({ values }) => setTags(values)}
         elementClassName="text-light bg-dark"
         placeholder="photo yellow flower"
       />
-      <Button onClick={handleSearch}>Search</Button>
     </div>
   );
 };
 
 SearchForm.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string),
-  onSearch: PropTypes.func,
-  onTags: PropTypes.func,
+  onFetchImages: PropTypes.func,
 };
 
-export default SearchForm;
+const dispatchMap = (dispatch) => ({
+  onFetchImages: (term) => dispatch(fetchImages(term)),
+});
+
+export default connect(null, dispatchMap)(SearchForm);

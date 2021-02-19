@@ -5,17 +5,13 @@ import ImageItem from './ImageItem';
 
 import { ListContainer } from '../../styled/image-list';
 
-const ImageList = (props) => {
-  const { images } = props;
-
-  return (
-    <ListContainer>
-      {images.map((image) => (
-        <ImageItem image={image} key={image.id} />
-      ))}
-    </ListContainer>
-  );
-};
+const ImageList = ({ images }) => (
+  <ListContainer>
+    {images.map((image) => (
+      <ImageItem image={image} key={image.id} />
+    ))}
+  </ListContainer>
+);
 
 ImageList.propTypes = {
   images: PropTypes.array,

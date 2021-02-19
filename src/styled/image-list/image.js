@@ -10,6 +10,7 @@ const Image = styled.img`
   left: 0;
   object-fit: cover;
   z-index: -1;
+  background-color: #fff;
 `;
 
 export default Image;
