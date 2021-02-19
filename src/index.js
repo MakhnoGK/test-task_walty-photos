@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 
 import { App } from './components';
 
-import appStore from './store';
+import store from './redux';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={appStore}>
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <Route path="/" component={App} exact />

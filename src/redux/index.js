@@ -2,15 +2,15 @@ import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import imagesReducer from './ducks/images';
-import watchFetchImages from './sagas/imagesSaga';
+import imagesReducer, { watchFetchImages } from './ducks/images';
 
 const sagaMiddleware = createSagaMiddleware();
-const appStore = createStore(
+
+const store = createStore(
   imagesReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(watchFetchImages);
 
-export default appStore;
+export default store;

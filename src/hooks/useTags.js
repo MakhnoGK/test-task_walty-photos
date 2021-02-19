@@ -10,6 +10,7 @@ export const useTags = (initialValue) => {
     if (params && params.tags) {
       setTags(params.tags.split('+'));
     }
+  // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
