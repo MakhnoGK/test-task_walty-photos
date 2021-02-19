@@ -7,9 +7,12 @@ import {
   Image,
   TagLink,
 } from '../../styled/image-list';
+import { IImage } from '../../interfaces/IImage';
 
-const ImageItem = ({image: { type, tags, webformatURL }}) => {
-  const displayTags = (input) => {
+const ImageItem: React.FC<{ image: IImage }> = ({
+  image: { tags, type, webformatURL },
+}) => {
+  const displayTags = (input: string) => {
     return input.split(', ').map((tag, index) => (
       <TagLink key={index} href={`/${tag}`}>
         {tag}
@@ -28,10 +31,10 @@ const ImageItem = ({image: { type, tags, webformatURL }}) => {
 
 ImageItem.propTypes = {
   image: PropTypes.shape({
-    webformatURL: PropTypes.string,
-    type: PropTypes.string,
-    tags: PropTypes.string,
-  }),
+    tags: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ImageItem;

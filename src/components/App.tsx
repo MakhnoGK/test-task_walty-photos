@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { ImageList, SearchForm } from '.';
 
-const App = ({ imageData, loading }) => (
+import { ImageState } from '../types/imageState';
+
+const App: React.FC<ImageState> = ({ data, loading }) => (
   <Container className="mb-5">
     <h2 className="text-center my-4">Walty - graphics for all your needs</h2>
 
@@ -19,13 +21,13 @@ const App = ({ imageData, loading }) => (
       <Col>
         {loading && <p className="text-center mt-2">Loading...</p>}
 
-        {imageData.total > 0 && (
+        {data.total > 0 && (
           <p className="text-right mt-2">
-            Results: {imageData.totalHits} of {imageData.total}
+            Results: {data.totalHits} of {data.total}
           </p>
         )}
 
-        <ImageList images={imageData.images} />
+        <ImageList images={data.hits} />
       </Col>
     </Row>
 
@@ -52,16 +54,16 @@ const App = ({ imageData, loading }) => (
 );
 
 App.propTypes = {
-  imageData: PropTypes.shape({
-    images: PropTypes.array,
-    total: PropTypes.number,
-    totalHits: PropTypes.number,
-  }),
-  loading: PropTypes.bool,
+  data: PropTypes.shape({
+    hits: PropTypes.array.isRequired,
+    total: PropTypes.number.isRequired,
+    totalHits: PropTypes.number.isRequired,
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-const propsMap = (state) => ({
-  imageData: state.data,
+const propsMap = (state: ImageState) => ({
+  data: state.data,
   loading: state.loading,
 });
 
