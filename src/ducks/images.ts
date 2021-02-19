@@ -29,9 +29,9 @@ const initialState: ImageState = {
 
 export default function imagesReducer(
   state = initialState,
-  action: ImageAction | null
+  action: ImageAction
 ) {
-  switch (action?.type) {
+  switch (action.type) {
     case ImageActionTypes.REQUEST_IMAGES:
       state = { ...state, loading: true };
       return state;
@@ -39,9 +39,9 @@ export default function imagesReducer(
       state = {
         ...state,
         data: {
-          hits: action?.payload!.hits,
-          total: action?.payload!.total,
-          totalHits: action?.payload!.totalHits,
+          hits: action.payload.hits,
+          total: action.payload.total,
+          totalHits: action.payload.totalHits,
         },
         loading: false,
       };

@@ -3,5 +3,5 @@ import { IImageData } from '../interfaces/IImageData';
 
 export type ImageAction = {
   type: ImageActionTypes;
-  payload?: IImageData;
+  payload: IImageData;
 };
