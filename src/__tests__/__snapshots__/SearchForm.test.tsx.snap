@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm tests renders correctly 1`] = `
+<div
+  className="input-group"
+>
+  <div
+    className="form-control d-inline-flex flex-wrap"
+  >
+    <input
+      aria-label="photo, yellow, flower"
+      autoFocus={true}
+      className="border-0 w-auto flex-fill input-tags"
+      data-testid="input-tags"
+      onChange={[Function]}
+      onKeyUp={[Function]}
+      placeholder="photo, yellow, flower"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
