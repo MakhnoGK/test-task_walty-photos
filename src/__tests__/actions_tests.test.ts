@@ -5,8 +5,6 @@ import {
 } from '../redux/ducks/images';
 import { ImageAction } from '../types/imageAction';
 
-export {};
-
 describe('Image action tests', () => {
   it('should create REQUEST_IMAGE', () => {
     const expectedAction: ImageAction = {
