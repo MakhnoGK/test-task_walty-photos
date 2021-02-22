@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component tests renders correctly 1`] = `
+<div
+  className="mb-5 container"
+>
+  <h2
+    className="text-center my-4"
+  >
+    Walty - graphics for all your needs
+  </h2>
+  <div
+    className="mb-4 row"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className="input-group"
+      >
+        <div
+          className="form-control d-inline-flex flex-wrap"
+        >
+          <input
+            aria-label="photo, yellow, flower"
+            autoFocus={true}
+            className="border-0 w-auto flex-fill input-tags"
+            data-testid="input-tags"
+            onChange={[Function]}
+            onKeyUp={[Function]}
+            placeholder="photo, yellow, flower"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="mb-5 row"
+  >
+    <div
+      className="col"
+    >
+      <p
+        className="text-center mt-2"
+      >
+        Loading...
+      </p>
+      <div
+        className="sc-bdfBwQ jtCSTU"
+      />
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className="d-flex align-items-center justify-content-center"
+      >
+        Powered by
+         
+        <a
+          className="ml-2"
+          href="http://pixabay.com/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="Pixabay"
+            src="https://pixabay.com/static/img/logo.svg"
+            width="150"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
