@@ -2,6 +2,7 @@ import { getImages } from '../api';
 
 describe('Image request API', () => {
   beforeEach(() => {
+    global.fetch = require('jest-fetch-mock');
     fetch.resetMocks();
   });
 
