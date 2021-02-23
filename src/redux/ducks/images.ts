@@ -60,7 +60,7 @@ export const fetchImages = (tags: string) => ({
 });
 //#endregion
 //#region Sagas
-function* fetchImagesAsync(action: {
+export function* fetchImagesAsync(action: {
   type: ImageActionTypes;
   payload: string;
 }) {

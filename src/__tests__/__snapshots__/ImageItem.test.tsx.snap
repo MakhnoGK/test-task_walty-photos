@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageItem tests renders correctly 1`] = `
+<div
+  className="sc-gsTCUz jrniJl"
+>
+  <div
+    className="sc-hKgILt jaYWgj"
+  >
+    photo
+  </div>
+  <div
+    className="sc-hKgILt jaYWgj"
+  >
+    <a
+      className="sc-eCssSg lcRtdq"
+      href="/test"
+    >
+      test
+    </a>
+    <a
+      className="sc-eCssSg lcRtdq"
+      href="/test"
+    >
+      test
+    </a>
+    <a
+      className="sc-eCssSg lcRtdq"
+      href="/test"
+    >
+      test
+    </a>
+  </div>
+  <img
+    alt="test, test, test"
+    className="sc-dlfnbm inbbut"
+    src="/"
+  />
+</div>
+`;
