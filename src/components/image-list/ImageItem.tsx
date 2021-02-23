@@ -8,9 +8,11 @@ import {
   TagLink,
 } from '../../styled/image-list';
 import { IImage } from '../../interfaces/IImage';
+import { GridListTile, GridListTileBar } from '@material-ui/core';
 
-const ImageItem: React.FC<{ image: IImage }> = ({
+const ImageItem: React.FC<{ image: IImage; style?: any }> = ({
   image: { tags, type, webformatURL },
+  style,
 }) => {
   const displayTags = (input: string) => {
     return input.split(', ').map((tag, index) => (
@@ -21,11 +23,10 @@ const ImageItem: React.FC<{ image: IImage }> = ({
   };
 
   return (
-    <ImageItemContainer>
-      <ImageInfo>{type}</ImageInfo>
-      <ImageInfo>{displayTags(tags)}</ImageInfo>
-      <Image alt={tags} src={webformatURL} />
-    </ImageItemContainer>
+    <GridListTile cols={1} style={{...style }}>
+      <img src={webformatURL} alt={tags} style={{  }} />
+      <GridListTileBar subtitle={displayTags(tags)} />
+    </GridListTile>
   );
 };
 
@@ -35,6 +36,7 @@ ImageItem.propTypes = {
     type: PropTypes.string.isRequired,
     webformatURL: PropTypes.string.isRequired,
   }).isRequired,
+  style: PropTypes.shape({}),
 };
 
 export default ImageItem;

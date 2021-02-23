@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Box, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,47 +9,43 @@ import { ImageState } from '../types/imageState';
 
 const App: React.FC<ImageState> = ({ data, loading }) => (
   <Container className="mb-5">
-    <h2 className="text-center my-4">Walty - graphics for all your needs</h2>
+    <Typography variant="h3">Walty - graphics for all your needs</Typography>
 
-    <Row className="mb-4">
-      <Col>
-        <SearchForm />
-      </Col>
-    </Row>
+    <Box>
+      <SearchForm />
+    </Box>
 
-    <Row className="mb-5">
-      <Col>
-        {loading && <p className="text-center mt-2">Loading...</p>}
+    <Box className="mb-5">
+      {loading && (
+        <Typography className="text-center mt-2">Loading...</Typography>
+      )}
 
-        {data.total > 0 && (
-          <p className="text-right mt-2">
-            Results: {data.totalHits} of {data.total}
-          </p>
-        )}
+      {data.total > 0 && (
+        <Typography className="text-right mt-2">
+          Results: {data.totalHits} of {data.total}
+        </Typography>
+      )}
 
-        <ImageList images={data.hits} />
-      </Col>
-    </Row>
+      <ImageList images={data.hits} />
+    </Box>
 
-    <Row>
-      <Col>
-        <div className="d-flex align-items-center justify-content-center">
-          Powered by{' '}
-          <a
-            href="http://pixabay.com/"
-            rel="noreferrer"
-            target="_blank"
-            className="ml-2"
-          >
-            <img
-              src="https://pixabay.com/static/img/logo.svg"
-              alt="Pixabay"
-              width="150"
-            />
-          </a>
-        </div>
-      </Col>
-    </Row>
+    <Box>
+      <Box className="d-flex align-items-center justify-content-center">
+        Powered by{' '}
+        <a
+          href="http://pixabay.com/"
+          rel="noreferrer"
+          target="_blank"
+          className="ml-2"
+        >
+          <img
+            src="https://pixabay.com/static/img/logo.svg"
+            alt="Pixabay"
+            width="150"
+          />
+        </a>
+      </Box>
+    </Box>
   </Container>
 );
 
