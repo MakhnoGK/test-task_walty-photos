@@ -63,7 +63,7 @@ export const fetchImages = (tags: string) => ({
 export function* fetchImagesAsync(action: {
   type: ImageActionTypes;
   payload: string;
-}) { 
+}) {
   try {
     yield put(requestImages());
 
