@@ -9,7 +9,9 @@ import { ImageState } from '../types/imageState';
 
 const App: React.FC<ImageState> = ({ data, loading }) => (
   <Container className="mb-5">
-    <Typography variant="h3" align="center" className="my-4">Walty - graphics for all your needs</Typography>
+    <Typography variant="h3" align="center" className="my-4">
+      Walty - graphics for all your needs
+    </Typography>
 
     <Box>
       <SearchForm />

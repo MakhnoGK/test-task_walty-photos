@@ -1,4 +1,4 @@
-import { styled, GridListTile } from "@material-ui/core";
+import { styled, GridListTile } from '@material-ui/core';
 
 const ShadowedTile = styled(GridListTile)({
   position: 'relative',

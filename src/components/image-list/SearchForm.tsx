@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { InputTags } from 'react-bootstrap-tagsinput';
 import { connect } from 'react-redux';
+import ChipInput from 'material-ui-chip-input';
 
 import { useTags } from '../../hooks/useTags';
 import { fetchImages, ImageActionTypes } from '../../redux/ducks/images';
@@ -12,6 +12,14 @@ const SearchForm: React.FC<{
 }> = ({ onFetchImages }) => {
   const [tags, setTags] = useTags([]);
 
+  const handleAddTag = (tag: string) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleDeleteTag = (tag: string) => {
+    setTags(tags.filter((searchTag) => tag !== searchTag));
+  };
+
   useEffect(() => {
     const term = tags.join('+');
     onFetchImages(term);
@@ -19,11 +27,14 @@ const SearchForm: React.FC<{
 
   return (
     <div className="input-group">
-      <InputTags
-        values={tags}
-        onTags={({ values }) => setTags(values)}
-        elementClassName="text-light bg-dark"
-        placeholder="photo, yellow, flower"
+      <ChipInput
+        value={tags}
+        onAdd={handleAddTag}
+        onDelete={handleDeleteTag}
+        newChipKeys={[' ', 'Enter']}
+        placeholder="photo flowers red"
+        label="Enter tags"
+        fullWidth
       />
     </div>
   );

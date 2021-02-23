@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GridListTile, GridListTileBar, Chip } from '@material-ui/core';
+import { GridListTileBar, Chip } from '@material-ui/core';
 
 import { IImage } from '../../interfaces/IImage';
 
@@ -20,8 +20,8 @@ const ImageItem: React.FC<{ image: IImage; style?: any }> = ({
           size="small"
           component="a"
           href={`/${tag}`}
-          clickable
           style={{ marginRight: '5px' }}
+          clickable
         />
       ));
   };
