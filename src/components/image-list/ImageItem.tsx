@@ -1,32 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { GridListTile, GridListTileBar, Chip } from '@material-ui/core';
 
-import {
-  ImageItemContainer,
-  ImageInfo,
-  Image,
-  TagLink,
-} from '../../styled/image-list';
 import { IImage } from '../../interfaces/IImage';
-import { GridListTile, GridListTileBar } from '@material-ui/core';
+
+import { ShadowedTile } from '../../styled/image-list';
 
 const ImageItem: React.FC<{ image: IImage; style?: any }> = ({
   image: { tags, type, webformatURL },
   style,
 }) => {
   const displayTags = (input: string) => {
-    return input.split(', ').map((tag, index) => (
-      <TagLink key={index} href={`/${tag}`}>
-        {tag}
-      </TagLink>
-    ));
+    return input
+      .split(', ')
+      .map((tag, index) => (
+        <Chip
+          key={index}
+          label={tag}
+          size="small"
+          component="a"
+          href={`/${tag}`}
+          clickable
+          style={{ marginRight: '5px' }}
+        />
+      ));
   };
 
   return (
-    <GridListTile cols={1} style={{...style }}>
-      <img src={webformatURL} alt={tags} style={{  }} />
+    <ShadowedTile cols={1} style={{ ...style }}>
+      <img src={webformatURL} alt={tags} style={{ backgroundColor: 'white' }} />
       <GridListTileBar subtitle={displayTags(tags)} />
-    </GridListTile>
+    </ShadowedTile>
   );
 };
 

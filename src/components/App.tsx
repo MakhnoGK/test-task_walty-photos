@@ -9,7 +9,7 @@ import { ImageState } from '../types/imageState';
 
 const App: React.FC<ImageState> = ({ data, loading }) => (
   <Container className="mb-5">
-    <Typography variant="h3">Walty - graphics for all your needs</Typography>
+    <Typography variant="h3" align="center" className="my-4">Walty - graphics for all your needs</Typography>
 
     <Box>
       <SearchForm />
@@ -21,7 +21,7 @@ const App: React.FC<ImageState> = ({ data, loading }) => (
       )}
 
       {data.total > 0 && (
-        <Typography className="text-right mt-2">
+        <Typography align="right" color="textSecondary" className="my-4">
           Results: {data.totalHits} of {data.total}
         </Typography>
       )}
